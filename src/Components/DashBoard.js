@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import  axios  from "axios";
-import MarginAndFluctuation from './Receipes/MarginAndFluctuation/MarginAndFluctuation';
+
+import RecipeTabs from './Recipes/DisplayRecipes/RecipeTab';
+import MarginAndFluctuation from './Recipes/MarginAndFluctuation/MarginAndFluctuation';
 
 export default class DashBoard extends Component {
     constructor(props) {
@@ -61,8 +63,9 @@ export default class DashBoard extends Component {
                 <>
                 <MarginAndFluctuation />
                  </>
-                {/* hello dear
-                <button onClick={()=>this.handlePage()}>ChangePage</button> */}
+                hello dear
+                <button onClick={()=>this.handlePage()}>ChangePage</button>
+                {/* <RecipeTabs /> */}
             </div>
         )
     }
