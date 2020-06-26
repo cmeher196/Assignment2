@@ -230,7 +230,10 @@ export default function DisplayAllRecipe() {
   useEffect(() => {
     axios.get(url, {
       params: {
-        page: pageNumber
+        page: pageNumber,
+        is_incorrect: false,
+        is_untagged:false,
+        id_disabled:false
       }
     }).then(res => res.data)
       .then(data => {
@@ -244,31 +247,16 @@ export default function DisplayAllRecipe() {
   }, [pageNumber])
 
   const observer = useRef()
-  const lastBookElementRef = useCallback(node => {
-
+  const lastRecipeElementRef = useCallback(node => {
     if (loading) return
-    if (observer.current) {
-      console.log(observer);
-
-      observer.current.disconnect()
-    }
+    if (observer.current) observer.current.disconnect()
     observer.current = new IntersectionObserver(entries => {
       if (entries[0].isIntersecting && hasMore) {
-
-        console.log('enteries', entries);
-        console.log('visible');
-
-
         setPageNumber(prevPageNumber => prevPageNumber + 1)
       }
-
     })
     if (node) {
-      console.log('node....', node);
       observer.current.observe(node)
-      console.log('observer.....in node', observer);
-
-
     }
   }, [loading, hasMore])
 
@@ -309,17 +297,6 @@ export default function DisplayAllRecipe() {
 
   const isSelected = name => selected.indexOf(name) !== -1;
 
-   const decimals = (n, d) => {
-    if ((typeof n !== 'number') || (typeof d !== 'number'))
-      return false;
-         n = parseFloat(n) || 0;
-     return n.toFixed(d);
-     }
-
-    //  const deci =(n,d) =>{
-    //   console.log(n,d)
-    //  }
-
   return (
     <div className={classes.root} >
       <Paper className={classes.paper}>
@@ -348,7 +325,7 @@ export default function DisplayAllRecipe() {
                     return (
 
                       <TableRow
-                        ref={lastBookElementRef}
+                        ref={lastRecipeElementRef}
                         hover
                         onClick={event => handleClick(event, data.name)}
                         role="checkbox"
