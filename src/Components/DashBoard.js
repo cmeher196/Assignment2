@@ -63,9 +63,9 @@ export default class DashBoard extends Component {
                 <>
                 <MarginAndFluctuation />
                  </>
-                hello dear
-                <button onClick={()=>this.handlePage()}>ChangePage</button>
-                {/* <RecipeTabs /> */}
+                {/* hello dear
+                <button onClick={()=>this.handlePage()}>ChangePage</button> */}
+                <RecipeTabs />
             </div>
         )
     }
