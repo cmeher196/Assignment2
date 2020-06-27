@@ -53,6 +53,9 @@ const useStyles = makeStyles((theme) => ({
     color: 'red',
     backgroundColor: 'aliceblue',
     width: 'fit-content'
+  },
+  tabpanel:{
+    borderRadius:'25px'
   }
 }));
 
@@ -68,7 +71,7 @@ export default function RecipeTabs() {
     <div className={classes.root}>
       <AppBar position="static" className={classes.appbar}>
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label="All Recipes(s)" {...a11yProps(0)} />
+          <Tab className={classes.tabpanel} label="All Recipes(s)" {...a11yProps(0)} />
           <Tab label="Incorrect" {...a11yProps(1)} />
           <Tab label="Untagged" {...a11yProps(2)} />
           <Tab label="Disabled" {...a11yProps(3)} />

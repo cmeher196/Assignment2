@@ -353,8 +353,14 @@ export default function DisplayAllRecipe() {
                         <TableCell align="center">{`${data.cogs}%`}</TableCell>
                         <TableCell align="center">{data.cost_price.toFixed(2)}</TableCell>
                         <TableCell align="center">{data.sale_price.toFixed(2)}</TableCell>
-                        <TableCell align="center">{(data.gross_margin.toFixed(2))}%</TableCell>
-                        <TableCell align="center"><mark style={{borderRadius:"25px"}}>{`Indian Ma...`}</mark></TableCell>
+                        {data.gross_margin < 0 ?
+                          <TableCell align="center" style={{ color: 'red' }}>{
+                            (data.gross_margin.toFixed(2))}%</TableCell>
+                          :
+                          <TableCell align="center">{
+                            (data.gross_margin.toFixed(2))}%</TableCell>
+                        }
+                          <TableCell align="center"><mark style={{borderRadius:"25px"}}>{`Indian Ma...`}</mark></TableCell>
                       </TableRow>
                     );
                   }
@@ -389,8 +395,14 @@ export default function DisplayAllRecipe() {
                         <TableCell align="center">{`${data.cogs}%`}</TableCell>
                         <TableCell align="center">{data.cost_price.toFixed(2)}</TableCell>
                         <TableCell align="center">{data.sale_price.toFixed(2)}</TableCell>
-                        <TableCell align="center">{`${data.gross_margin}%`}</TableCell>
-                        <TableCell align="center"><mark style={{borderRadius:"25px"}}>{`Indian Ma...`}</mark></TableCell>
+                        {data.gross_margin < 0 ?
+                          <TableCell align="center" style={{ color: 'red' }}>{
+                            (data.gross_margin.toFixed(2))}%</TableCell>
+                          :
+                          <TableCell align="center">{
+                            (data.gross_margin.toFixed(2))}%</TableCell>
+                        }
+                          <TableCell align="center"><mark style={{borderRadius:"25px"}}>{`Indian Ma...`}</mark></TableCell>
                       </TableRow>
                     )
                   }

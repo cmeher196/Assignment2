@@ -84,7 +84,7 @@ function EnhancedTableHead(props) {
           <TableCell
             key={headCell.id}
             //align={headCell.numeric ? "right" : "left"}
-            align={headCell.label==='NAME' ? "left" : "center"}
+            align={headCell.label === 'NAME' ? "left" : "center"}
             padding={headCell.disablePadding ? "none" : "default"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -233,12 +233,12 @@ export default function DisplayDisabledRecipe() {
       params: {
         page: pageNumber,
         is_incorrect: false,
-        is_untagged:false,
-        id_disabled:true
-        }
+        is_untagged: false,
+        id_disabled: true
+      }
     }).then(res => res.data)
       .then(data => {
-          setRecipe(prevRecipe => {
+        setRecipe(prevRecipe => {
           return [...new Set([...prevRecipe, ...data.results])]
         })
         setHasMore(data.results.length > 0)
@@ -353,8 +353,17 @@ export default function DisplayDisabledRecipe() {
                         <TableCell align="center">{`${data.cogs}%`}</TableCell>
                         <TableCell align="center">{data.cost_price.toFixed(2)}</TableCell>
                         <TableCell align="center">{data.sale_price.toFixed(2)}</TableCell>
-                        <TableCell align="center">{(data.gross_margin.toFixed(2))}%</TableCell>
-                        <TableCell align="center"><mark style={{borderRadius:"25px"}}>{`Indian Ma...`}</mark></TableCell>
+
+                        {data.gross_margin < 0 ?
+                          <TableCell align="center" style={{ color: 'red' }}>{
+                            (data.gross_margin.toFixed(2))}%</TableCell>
+                          :
+                          <TableCell align="center">{
+
+                            (data.gross_margin.toFixed(2))}%</TableCell>
+                        }
+
+                        <TableCell align="center"><mark style={{ borderRadius: "25px" }}>{`Indian Ma...`}</mark></TableCell>
                       </TableRow>
                     );
                   }
@@ -389,8 +398,14 @@ export default function DisplayDisabledRecipe() {
                         <TableCell align="center">{`${data.cogs}%`}</TableCell>
                         <TableCell align="center">{data.cost_price.toFixed(2)}</TableCell>
                         <TableCell align="center">{data.sale_price.toFixed(2)}</TableCell>
-                        <TableCell align="center">{`${data.gross_margin.toFixed(2)}%`}</TableCell>
-                        <TableCell align="center"><mark style={{borderRadius:"25px"}}>{`Indian Ma...`}</mark></TableCell>
+                        {data.gross_margin < 0 ?
+                          <TableCell align="center" style={{ color: 'red' }}>{
+                            (data.gross_margin.toFixed(2))}%</TableCell>
+                          :
+                          <TableCell align="center">{
+                            (data.gross_margin.toFixed(2))}%</TableCell>
+                        }
+                        <TableCell align="center"><mark style={{ borderRadius: "25px" }}>{`Indian Ma...`}</mark></TableCell>
                       </TableRow>
                     )
                   }

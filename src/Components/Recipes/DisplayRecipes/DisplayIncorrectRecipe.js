@@ -63,7 +63,8 @@ function EnhancedTableHead(props) {
     orderBy,
     numSelected,
     rowCount,
-    onRequestSort
+    onRequestSort,
+
   } = props;
   const createSortHandler = property => event => {
     onRequestSort(event, property);
@@ -113,7 +114,8 @@ EnhancedTableHead.propTypes = {
   onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.oneOf(["asc", "desc"]).isRequired,
   orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired
+  rowCount: PropTypes.number.isRequired,
+  
 };
 
 const useToolbarStyles = makeStyles(theme => ({
@@ -199,7 +201,7 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(2)
   },
   table: {
-    minWidth: 750
+    minWidth: 750,
   },
   visuallyHidden: {
     border: 0,
@@ -237,8 +239,6 @@ export default function DisplayIncorrectRecipe() {
         }
     }).then(res => res.data)
       .then(data => {
-        console.log('ccccccccccccccc.............',data);
-        
         setRecipe(prevRecipe => {
           return [...new Set([...prevRecipe, ...data.results])]
         })
@@ -311,6 +311,7 @@ export default function DisplayIncorrectRecipe() {
           >
             <EnhancedTableHead
               classes={classes}
+              style={{backgroundColor:'red'}}
               numSelected={selected.length}
               order={order}
               orderBy={orderBy}
@@ -354,8 +355,14 @@ export default function DisplayIncorrectRecipe() {
                         <TableCell align="center">{`${data.cogs}%`}</TableCell>
                         <TableCell align="center">{data.cost_price.toFixed(2)}</TableCell>
                         <TableCell align="center">{data.sale_price.toFixed(2)}</TableCell>
-                        <TableCell align="center">{(data.gross_margin.toFixed(2))}%</TableCell>
-                        <TableCell align="center"><mark style={{borderRadius:"25px"}}>{`Indian Ma...`}</mark></TableCell>
+                        {data.gross_margin < 0 ?
+                          <TableCell align="center" style={{ color: 'red' }}>{
+                            (data.gross_margin.toFixed(2))}%</TableCell>
+                          :
+                          <TableCell align="center">{
+                            (data.gross_margin.toFixed(2))}%</TableCell>
+                        }
+                          <TableCell align="center"><mark style={{borderRadius:"25px"}}>{`Indian Ma...`}</mark></TableCell>
                       </TableRow>
                     );
                   }
@@ -390,7 +397,13 @@ export default function DisplayIncorrectRecipe() {
                         <TableCell align="center">{`${data.cogs}%`}</TableCell>
                         <TableCell align="center">{data.cost_price.toFixed(2)}</TableCell>
                         <TableCell align="center">{data.sale_price.toFixed(2)}</TableCell>
-                        <TableCell align="center">{`${data.gross_margin}%`}</TableCell>
+                        {data.gross_margin < 0 ?
+                          <TableCell align="center" style={{ color: 'red' }}>{
+                            (data.gross_margin.toFixed(2))}%</TableCell>
+                          :
+                          <TableCell align="center">{
+                            (data.gross_margin.toFixed(2))}%</TableCell>
+                        }
                         <TableCell align="center"><mark style={{borderRadius:"25px"}}>{`Indian Ma...`}</mark></TableCell>
                       </TableRow>
                     )
