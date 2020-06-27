@@ -19,15 +19,12 @@ setConfiguration({ maxScreenClass: 'xl' });
 const useStyles = makeStyles({
     root: {
         minWidth: 275,
-        // paddingRight: '0px !important',
-        // paddingLeft:'0px !important'
-        
     },
 
     col: {
-        
+
         paddingRight: '0px !important',
-        paddingLeft:'0px !important'
+        paddingLeft: '0px !important'
     },
     bullet: {
         display: 'inline-block',
@@ -41,19 +38,20 @@ const useStyles = makeStyles({
     },
     pos: {
         marginBottom: 12,
+       // fontSize:'13px',
+        textAlign:'center'
     },
-    // container:{
-    // //     boxSizing: 'borderBox',
-    // //     position: 'relative',
-    // // /* margin-left: auto; */
-    // // /* margin-right: auto; */
-    // //     paddingLeft: '15px',
-    // //     paddingRight: '15px',
-    // //     maxWidth: '0px'
-    // }
 });
+
+const cardHeader = makeStyles({
+    root: {
+        height: '100%',
+        width: '100%'
+    }
+})
 export default function MarginAndFluctuation() {
     const classes = useStyles();
+    const cardClass = cardHeader();
     const [highMargin, setHighMargin] = useState([]);
     const [lowMargin, setLowMargin] = useState([]);
     const [fluctuation, setFluctuation] = useState([])
@@ -94,17 +92,16 @@ export default function MarginAndFluctuation() {
             .catch(err => { throw err })
     }, [])
     return (
-
         <Container >
             <Row className={classes.row}>
                 <Col sm={4}>
                     <Card className={classes.root}>
-                        <CardHeader title={
-                            <span gutterBottom variant="h5" component="h2" style={{fontSize:'initial'}}>
+                        <CardHeader className={cardClass.root} title={
+                            <span gutterBottom variant="h5" component="h2" style={{ fontSize: 'initial' }}>
                                 High Margin Recipes
                             </span>
-                        }  style={{ backgroundColor: '#dae4f5',fontSize:'initial' }}>
-                        
+                        } style={{ backgroundColor: '#dae4f5', fontSize: 'initial' }}>
+
                         </CardHeader>
                         <CardContent>
                             <Row>
@@ -112,27 +109,30 @@ export default function MarginAndFluctuation() {
                                     highMargin.length ? (
                                         highMargin.map((data, index) => (
                                             <Col sm={4} key={index}>
-                                                <Typography className={classes.pos} color="textSecondary">
-                                                    {data.name}
-                                                </Typography>
-                                                <Box position="relative" display="inline-flex">
-                                                    <CircularProgress variant="static" value={data.margin} style={{ color: 'green' }} />
-                                                    <Box
-                                                        top={0}
-                                                        left={0}
-                                                        bottom={0}
-                                                        right={0}
-                                                        position="absolute"
-                                                        display="flex"
-                                                        alignItems="center"
-                                                        justifyContent="center"
-                                                    >
-                                                        <Typography variant="caption" component="div" color="textSecondary" style={{ color: 'green' }}>
-                                                            {`${data.margin}%`}
-                                                        </Typography>
+                                                <Row style={{fontSize:'13px' }}>
+                                                    <Typography className={classes.pos} color="textSecondary">
+                                                        {data.name}
+                                                    </Typography>
+                                                </Row>
+                                                <Row style={{ paddingLeft: '35px',fontSize:'13px' }}>
+                                                    <Box position="relative" display="inline-flex">
+                                                        <CircularProgress variant="static" value={data.margin} style={{ color: 'green' }} />
+                                                        <Box
+                                                            top={0}
+                                                            left={0}
+                                                            bottom={0}
+                                                            right={0}
+                                                            position="absolute"
+                                                            display="flex"
+                                                            alignItems="center"
+                                                            justifyContent="center"
+                                                        >
+                                                            <Typography variant="caption" component="div" color="textSecondary" style={{ color: 'green' }}>
+                                                                {`${data.margin}%`}
+                                                            </Typography>
+                                                        </Box>
                                                     </Box>
-                                                </Box>
-
+                                                </Row>
                                             </Col>
                                         ))
                                     ) : null
@@ -141,44 +141,46 @@ export default function MarginAndFluctuation() {
                         </CardContent>
                     </Card>
                 </Col>
-
                 <Col sm={4}>
                     <Card className={classes.root}>
-                        <CardHeader 
-                        title={
-                            <span gutterBottom variant="h5" component="h2" style={{fontSize:'initial'}}>
-                                Low Margin Recipes
+                        <CardHeader
+                            title={
+                                <span gutterBottom variant="h5" component="h2" style={{ fontSize: 'initial' }}>
+                                    Low Margin Recipes
                             </span>
-                        } 
-                        style={{ backgroundColor: '#dae4f5'}}>
+                            }
+                            style={{ backgroundColor: '#dae4f5' }}>
                         </CardHeader>
-                        <CardContent>
+                        <CardContent style={{height:'123px'}}>
                             <Row>
                                 {
                                     lowMargin.length ? (
                                         lowMargin.map((data, index) => (
                                             <Col sm={4} key={index}>
-                                                <Typography className={classes.pos} color="textSecondary">
-                                                    {data.name}
-                                                </Typography>
-                                                <Box position="relative" display="inline-flex">
-                                                    <CircularProgress variant="static" value={data.margin} style={{ color: 'red' }} />
-                                                    <Box
-                                                        top={0}
-                                                        left={0}
-                                                        bottom={0}
-                                                        right={0}
-                                                        position="absolute"
-                                                        display="flex"
-                                                        alignItems="center"
-                                                        justifyContent="center"
-                                                    >
-                                                        <Typography variant="caption" component="div" color="textSecondary" style={{ color: 'red' }}>
-                                                            {`${data.margin}%`}
-                                                        </Typography>
+                                                <Row>
+                                                    <Typography className={classes.pos} color="textSecondary">
+                                                        {data.name}
+                                                    </Typography>
+                                                </Row>
+                                                <Row style={{ paddingLeft: '35px' }}>
+                                                    <Box position="relative" display="inline-flex">
+                                                        <CircularProgress variant="static" value={data.margin} style={{ color: 'red' }} />
+                                                        <Box
+                                                            top={0}
+                                                            left={0}
+                                                            bottom={0}
+                                                            right={0}
+                                                            position="absolute"
+                                                            display="flex"
+                                                            alignItems="center"
+                                                            justifyContent="center"
+                                                        >
+                                                            <Typography variant="caption" component="div" color="textSecondary" style={{ color: 'red' }}>
+                                                                {`${data.margin}%`}
+                                                            </Typography>
+                                                        </Box>
                                                     </Box>
-                                                </Box>
-
+                                                </Row>
                                             </Col>
                                         ))
                                     ) : null
@@ -190,60 +192,37 @@ export default function MarginAndFluctuation() {
 
                 <Col sm={4}>
                     <Card className={classes.root} title='hiiii'>
-                        <CardHeader 
-                        title={
-                            <span gutterBottom variant="h5" component="h2" style={{fontSize:'initial'}}>
-                                Top Fluctuating Recipes
+                        <CardHeader
+                            title={
+                                <span gutterBottom variant="h5" component="h2" style={{ fontSize: 'initial' }}>
+                                    Top Fluctuating Recipes
                             </span>
-                        } 
-                         style={{ backgroundColor: '#dae4f5',fontSize:'initial' }}>
+                            }
+                            style={{ backgroundColor: '#dae4f5', fontSize: 'initial' }}>
                         </CardHeader>
-                        <CardContent>
+                        <CardContent style={{height:'123px'}}>
                             <Row>
                                 {
                                     fluctuation.length ? (
                                         fluctuation.map((data, index) => (
                                             <Col sm={4} key={index}>
-                                                <Typography className={classes.pos} color="textSecondary">
-                                                    {data.name}
-                                                </Typography>
-                                                <LinearProgress variant="determinate" value={0} style={{ backgroundColor: '#dfe2e8', width: '50%', marginLeft: '22px' }} />
-                                                <Typography className={classes.pos} color="textSecondary" style={{ color: 'green' }}>
-                                                    {`${data.fluctuation}%`}<ArrowUpwardIcon fontSize='small' />
-                                                </Typography>
+                                                <Row>
+                                                    <Typography className={classes.pos} color="textSecondary">
+                                                        {data.name}
+                                                    </Typography>
+                                                    <LinearProgress variant="determinate" value={0} style={{ backgroundColor: '#dfe2e8', width: '50%', marginLeft: '22px' }} />
+                                                </Row>
+                                                <Row style={{ paddingLeft: '30px' }}>
+                                                    <Typography className={classes.pos} color="textSecondary" style={{ color: 'green' }}>
+                                                        {`${data.fluctuation}%`}<ArrowUpwardIcon fontSize='small' />
+                                                    </Typography>
+                                                </Row>
                                             </Col>
+
                                         ))
                                     ) : null
                                 }
-                                {/* <Col sm={4}>
-                                    <Typography className={classes.pos} color="textSecondary">
-                                        Ambur Biryani
-                                </Typography>
-                                    <LinearProgress variant="determinate" value={0} style={{ backgroundColor: '#dfe2e8', width: '50%', marginLeft: '22px' }} />
-                                    <Typography className={classes.pos} color="textSecondary" style={{ color: 'green' }}>
-                                        {`${5}%`}<ArrowUpwardIcon fontSize='small' />
-                                    </Typography>
-                                </Col> */}
-                                {/* <Col sm={4}>
-                                    <Typography className={classes.pos} color="textSecondary">
-                                        Palak Tikka<br />
-                                Masala
-                                </Typography>
-                                    <LinearProgress variant="determinate" value={0} style={{ backgroundColor: '#dfe2e8', width: '50%', marginLeft: '22px' }} />
-                                    <Typography className={classes.pos} color="textSecondary" style={{ color: 'red' }}>
-                                        {`${3}%`}<ArrowDownwardIcon fontSize='small' />
-                                    </Typography>
-                                </Col>
-                                <Col sm={4}>
-                                    <Typography className={classes.pos} color="textSecondary">
-                                        Palak Paneer
-                                </Typography>
-                                    <LinearProgress variant="determinate" value={0} style={{ backgroundColor: '#dfe2e8', width: '50%', marginLeft: '22px' }} />
-                                    <Typography className={classes.pos} color="textSecondary" style={{ color: 'red' }}>
-                                        {`${8}%`}<ArrowDownwardIcon fontSize='small' />
-                                    </Typography>
 
-                                </Col> */}
                             </Row>
                         </CardContent>
                     </Card>
