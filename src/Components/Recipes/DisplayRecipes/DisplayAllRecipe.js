@@ -65,7 +65,7 @@ function EnhancedTableHead(props) {
     rowCount,
     onRequestSort
   } = props;
-  const createSortHandler = property => event => {
+  const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
 
@@ -84,7 +84,6 @@ function EnhancedTableHead(props) {
           <TableCell
             key={headCell.id}
             align={headCell.label==='NAME' ? "left" : "center"}
-           // align={"center"}
             padding={headCell.disablePadding ? "none" : "default"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -121,9 +120,6 @@ const useToolbarStyles = makeStyles(theme => ({
   root: {
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(1),
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.hover
-    }
   },
   highlight:
     theme.palette.type === "light"
@@ -162,14 +158,6 @@ const EnhancedTableToolbar = props => {
           {numSelected} selected
         </Typography>
       ) : (null
-          // <Typography
-          //   className={classes.title}
-          //   variant="h6"
-          //   id="tableTitle"
-          //   component="div"
-          // >
-          //   Nutrition
-          // </Typography>
         )}
 
       {numSelected > 0 ? (
@@ -179,18 +167,11 @@ const EnhancedTableToolbar = props => {
           </IconButton>
         </Tooltip>
       ) : (null
-          // <Tooltip title="Filter list">
-          //   <IconButton aria-label="filter list">
-          //     <FilterListIcon />
-          //   </IconButton>
-          // </Tooltip>
         )}
     </Toolbar>)
     :null}
     </>
-    
   );
-
 };
 
 EnhancedTableToolbar.propTypes = {
@@ -200,7 +181,7 @@ EnhancedTableToolbar.propTypes = {
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
-    padding:'initial !important'
+    
   },
   paper: {
     width: "100%",
@@ -233,10 +214,10 @@ const useStyles = makeStyles(theme => ({
 
 export default function DisplayAllRecipe() {
   const classes = useStyles();
-  const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("lastUpdated");
-  const [selected, setSelected] = React.useState([]);
-
+  const [order, setOrder] = useState("asc");
+  const [orderBy, setOrderBy] = useState("lastUpdated");
+  const [selected, setSelected] = useState([]);
+  
   const url = 'https://beta.eagleowl.in/api/v1/mock/organization/18/outlet/18/recipe/recipes';
   const [recipe, setRecipe] = useState([])
   const [pageNumber, setPageNumber] = useState(1)
@@ -265,8 +246,6 @@ export default function DisplayAllRecipe() {
 
   const observer = useRef()
   const lastRecipeElementRef = useCallback(node => {
-    console.log('node....',node);
-
     if (loading) return
     if (observer.current) observer.current.disconnect()
     observer.current = new IntersectionObserver(entries => {
@@ -275,14 +254,11 @@ export default function DisplayAllRecipe() {
       }
     })
     if (node) {
-
-      console.log(node,'helllo');
-      
       observer.current.observe(node)
     }
   }, [loading, hasMore])
 
-  const handleRequestSort = (event, property) => {
+  const handleRequestSort = (event,property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
@@ -313,7 +289,6 @@ export default function DisplayAllRecipe() {
         selected.slice(selectedIndex + 1)
       );
     }
-
     setSelected(newSelected);
   };
 
@@ -329,7 +304,6 @@ export default function DisplayAllRecipe() {
             className={classes.table}
             aria-labelledby="tableTitle"
             aria-label="enhanced table"
-             
           >
           <EnhancedTableHead
               classes={classes}
@@ -347,16 +321,14 @@ export default function DisplayAllRecipe() {
                   const labelId = `enhanced-table-checkbox-${index}`;
                   if (recipe.length === index + 1) {
                     return (
-                      
                       <TableRow
-                      ref={lastRecipeElementRef}
-
-                      hover
+                        ref={lastRecipeElementRef}
+                        hover
                         onClick={event => handleClick(event, data.name)}
                         role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}
-                        key={data.id}
+                        key={data.name}
                         selected={isItemSelected}
                         className={classes.tablerow}
                       >

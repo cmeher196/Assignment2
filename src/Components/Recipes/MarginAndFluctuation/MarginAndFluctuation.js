@@ -114,7 +114,7 @@ export default function MarginAndFluctuation() {
                                                         {data.name}
                                                     </Typography>
                                                 </Row>
-                                                <Row style={{ paddingLeft: '35px',fontSize:'13px' }}>
+                                                <Row style={{ paddingLeft: '35px',fontSize:'13px'}}>
                                                     <Box position="relative" display="inline-flex">
                                                         <CircularProgress variant="static" value={data.margin} style={{ color: 'green' }} />
                                                         <Box
@@ -162,7 +162,7 @@ export default function MarginAndFluctuation() {
                                                         {data.name}
                                                     </Typography>
                                                 </Row>
-                                                <Row style={{ paddingLeft: '35px' }}>
+                                                <Row style={{ paddingLeft: '35px',paddingTop:'20px' }}>
                                                     <Box position="relative" display="inline-flex">
                                                         <CircularProgress variant="static" value={data.margin} style={{ color: 'red' }} />
                                                         <Box
@@ -207,12 +207,12 @@ export default function MarginAndFluctuation() {
                                         fluctuation.map((data, index) => (
                                             <Col sm={4} key={index}>
                                                 <Row>
-                                                    <Typography className={classes.pos} color="textSecondary">
+                                                    <Typography style={{fontSize:'13px'}} className={classes.pos} color="textSecondary">
                                                         {data.name}
                                                     </Typography>
                                                     <LinearProgress variant="determinate" value={0} style={{ backgroundColor: '#dfe2e8', width: '50%', marginLeft: '22px' }} />
                                                 </Row>
-                                                <Row style={{ paddingLeft: '30px' }}>
+                                                <Row style={{ paddingLeft: '30px',paddingTop:'15px' }}>
                                                     <Typography className={classes.pos} color="textSecondary" style={{ color: 'green' }}>
                                                         {`${data.fluctuation}%`}<ArrowUpwardIcon fontSize='small' />
                                                     </Typography>

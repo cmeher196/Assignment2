@@ -5,7 +5,7 @@ import DashBoard from './Components/DashBoard'
 function App() {
   return (
     <div className="App">
-      <h1>Hello Assignment</h1>
+      <h2>Assignment-2</h2>
         <DashBoard />
 
     </div>  

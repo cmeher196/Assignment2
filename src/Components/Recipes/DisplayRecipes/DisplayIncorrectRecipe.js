@@ -246,7 +246,7 @@ export default function DisplayIncorrectRecipe() {
     axios.get(url, {
       params: {
         page: pageNumber,
-        is_incorrect: true,
+        is_incorrect: false,
         is_untagged:false,
         id_disabled:false
         }
