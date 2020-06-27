@@ -145,6 +145,7 @@ const EnhancedTableToolbar = props => {
   const { numSelected } = props;
 
   return (
+    <div style={{padding:'initial'}}> 
     <Toolbar
       className={clsx(classes.root, {
         [classes.highlight]: numSelected > 0
@@ -184,7 +185,9 @@ const EnhancedTableToolbar = props => {
           // </Tooltip>
         )}
     </Toolbar>
+    </div>
   );
+
 };
 
 EnhancedTableToolbar.propTypes = {
@@ -193,11 +196,13 @@ EnhancedTableToolbar.propTypes = {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: "100%"
+    width: "100%",
+    padding:'initial !important'
   },
   paper: {
     width: "100%",
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(2),
+   // padding:'inherit'
   },
   table: {
     minWidth: 750
@@ -212,7 +217,13 @@ const useStyles = makeStyles(theme => ({
     position: "absolute",
     top: 20,
     width: 1
+  },
+  tablerow:{
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
   }
+  
 }));
 
 export default function DisplayAllRecipe() {
@@ -302,7 +313,7 @@ export default function DisplayAllRecipe() {
     <div className={classes.root} >
       <Paper className={classes.paper}>
         <EnhancedTableToolbar numSelected={selected.length} />
-        <TableContainer>
+        <TableContainer >
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
@@ -324,7 +335,7 @@ export default function DisplayAllRecipe() {
                   const labelId = `enhanced-table-checkbox-${index}`;
                   if (recipe.length === index + 1) {
                     return (
-
+                      
                       <TableRow
                         ref={lastRecipeElementRef}
                         hover
@@ -332,8 +343,9 @@ export default function DisplayAllRecipe() {
                         role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}
-                        key={data.name}
+                        key={data.id}
                         selected={isItemSelected}
+                        className={classes.tablerow}
                       >
                         <TableCell padding="checkbox">
                           <Checkbox
@@ -368,14 +380,15 @@ export default function DisplayAllRecipe() {
                     return (
 
                       <TableRow
-
+                        className={classes.tablerow}
                         hover
                         onClick={event => handleClick(event, data.name)}
                         role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}
-                        key={data.name}
+                        key={data.id}
                         selected={isItemSelected}
+                        
                       >
                         <TableCell padding="checkbox">
                           <Checkbox

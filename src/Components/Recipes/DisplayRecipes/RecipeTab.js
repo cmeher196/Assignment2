@@ -23,7 +23,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box p={3}>
+        <Box p={3} style={{padding:'initial'}}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -50,13 +50,24 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   appbar: {
-    color: 'red',
+    color: '#000',
     backgroundColor: 'aliceblue',
-    width: 'fit-content'
+    width: 'fit-content',
+    padding:'initial'
   },
   tabpanel:{
-    borderRadius:'25px'
+    // borderRadius:'25px',
+    position:'relative',
+  //   -webkit-border-top-left-radius: '15px',
+  // -webkit-border-top-right-radius: '15px',
+  // -moz-border-radius-topleft: '15px',
+  // -moz-border-radius-topright: '15px',
+  borderTopLeftRadius: '15px',
+  borderTopRightRadius: '15px',
+  '&:active':{
+    zIndex:3
   }
+  },
 }));
 
 export default function RecipeTabs() {
@@ -78,7 +89,7 @@ export default function RecipeTabs() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <DisplayAllRecipe />
+          <DisplayAllRecipe />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <DisplayIncorrectRecipe />

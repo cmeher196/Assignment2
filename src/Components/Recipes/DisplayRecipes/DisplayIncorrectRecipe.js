@@ -213,6 +213,11 @@ const useStyles = makeStyles(theme => ({
     position: "absolute",
     top: 20,
     width: 1
+  },
+  tablerow:{
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
   }
 }));
 
@@ -328,6 +333,7 @@ export default function DisplayIncorrectRecipe() {
                     return (
 
                       <TableRow
+                        className={classes.tablerow}
                         ref={lastRecipeElementRef}
                         hover
                         onClick={event => handleClick(event, data.name)}
@@ -370,7 +376,7 @@ export default function DisplayIncorrectRecipe() {
                     return (
 
                       <TableRow
-
+                        className={classes.tablerow}
                         hover
                         onClick={event => handleClick(event, data.name)}
                         role="checkbox"
