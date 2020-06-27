@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     color: '#000',
     backgroundColor: 'aliceblue',
     width: 'fit-content',
-    padding:'initial'
+    padding:'initial',
   },
   tabpanel:{
     // borderRadius:'25px',

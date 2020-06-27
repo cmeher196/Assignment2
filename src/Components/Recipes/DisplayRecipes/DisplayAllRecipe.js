@@ -145,7 +145,8 @@ const EnhancedTableToolbar = props => {
   const { numSelected } = props;
 
   return (
-    <div style={{padding:'initial'}}> 
+    <>
+    {numSelected > 0 ? (
     <Toolbar
       className={clsx(classes.root, {
         [classes.highlight]: numSelected > 0
@@ -184,8 +185,10 @@ const EnhancedTableToolbar = props => {
           //   </IconButton>
           // </Tooltip>
         )}
-    </Toolbar>
-    </div>
+    </Toolbar>)
+    :null}
+    </>
+    
   );
 
 };
@@ -202,7 +205,6 @@ const useStyles = makeStyles(theme => ({
   paper: {
     width: "100%",
     marginBottom: theme.spacing(2),
-   // padding:'inherit'
   },
   table: {
     minWidth: 750
@@ -222,7 +224,10 @@ const useStyles = makeStyles(theme => ({
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.action.hover,
     },
-  }
+  },
+  container: {
+    maxHeight: 440,
+  },
   
 }));
 
@@ -260,6 +265,8 @@ export default function DisplayAllRecipe() {
 
   const observer = useRef()
   const lastRecipeElementRef = useCallback(node => {
+    console.log('node....',node);
+
     if (loading) return
     if (observer.current) observer.current.disconnect()
     observer.current = new IntersectionObserver(entries => {
@@ -268,6 +275,9 @@ export default function DisplayAllRecipe() {
       }
     })
     if (node) {
+
+      console.log(node,'helllo');
+      
       observer.current.observe(node)
     }
   }, [loading, hasMore])
@@ -313,13 +323,15 @@ export default function DisplayAllRecipe() {
     <div className={classes.root} >
       <Paper className={classes.paper}>
         <EnhancedTableToolbar numSelected={selected.length} />
-        <TableContainer >
+        <TableContainer className={classes.container}>
           <Table
+            stickyHeader
             className={classes.table}
             aria-labelledby="tableTitle"
             aria-label="enhanced table"
+             
           >
-            <EnhancedTableHead
+          <EnhancedTableHead
               classes={classes}
               numSelected={selected.length}
               order={order}
@@ -327,8 +339,8 @@ export default function DisplayAllRecipe() {
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
               rowCount={recipe.length}
-            />
-            <TableBody >
+            />  
+            <TableBody style={{overflowY:'scroll'}} >
               {stableSort(recipe, getComparator(order, orderBy)).map(
                 (data, index) => {
                   const isItemSelected = isSelected(data.name);
@@ -337,8 +349,9 @@ export default function DisplayAllRecipe() {
                     return (
                       
                       <TableRow
-                        ref={lastRecipeElementRef}
-                        hover
+                      ref={lastRecipeElementRef}
+
+                      hover
                         onClick={event => handleClick(event, data.name)}
                         role="checkbox"
                         aria-checked={isItemSelected}

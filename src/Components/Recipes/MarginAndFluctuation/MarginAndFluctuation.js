@@ -4,9 +4,7 @@ import Box from '@material-ui/core/Box';
 import { setConfiguration } from 'react-grid-system';
 import { Container, Row, Col } from 'react-grid-system';
 import Card from '@material-ui/core/Card';
-//import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-//import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { CardHeader } from '@material-ui/core';
@@ -23,7 +21,9 @@ const useStyles = makeStyles({
         minWidth: 275,
         // paddingRight: '0px !important',
         // paddingLeft:'0px !important'
+        
     },
+
     col: {
         
         paddingRight: '0px !important',
@@ -42,6 +42,15 @@ const useStyles = makeStyles({
     pos: {
         marginBottom: 12,
     },
+    // container:{
+    // //     boxSizing: 'borderBox',
+    // //     position: 'relative',
+    // // /* margin-left: auto; */
+    // // /* margin-right: auto; */
+    // //     paddingLeft: '15px',
+    // //     paddingRight: '15px',
+    // //     maxWidth: '0px'
+    // }
 });
 export default function MarginAndFluctuation() {
     const classes = useStyles();
@@ -86,7 +95,7 @@ export default function MarginAndFluctuation() {
     }, [])
     return (
 
-        <Container>
+        <Container >
             <Row className={classes.row}>
                 <Col sm={4}>
                     <Card className={classes.root}>

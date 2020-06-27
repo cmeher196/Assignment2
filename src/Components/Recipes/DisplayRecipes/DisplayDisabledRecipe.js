@@ -145,6 +145,8 @@ const EnhancedTableToolbar = props => {
   const { numSelected } = props;
 
   return (
+    <>
+    {numSelected > 0 ?
     <Toolbar
       className={clsx(classes.root, {
         [classes.highlight]: numSelected > 0
@@ -184,6 +186,9 @@ const EnhancedTableToolbar = props => {
           // </Tooltip>
         )}
     </Toolbar>
+    : null
+      }
+      </>
   );
 };
 
@@ -217,7 +222,10 @@ const useStyles = makeStyles(theme => ({
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.action.hover,
     },
-  }
+  },
+  container: {
+    maxHeight: 440,
+  },
 }));
 
 export default function DisplayDisabledRecipe() {
@@ -307,8 +315,9 @@ export default function DisplayDisabledRecipe() {
     <div className={classes.root} >
       <Paper className={classes.paper}>
         <EnhancedTableToolbar numSelected={selected.length} />
-        <TableContainer>
+        <TableContainer className={classes.container}>
           <Table
+            stickyHeader
             className={classes.table}
             aria-labelledby="tableTitle"
             aria-label="enhanced table"
@@ -329,7 +338,7 @@ export default function DisplayDisabledRecipe() {
                   const labelId = `enhanced-table-checkbox-${index}`;
                   if (recipe.length === index + 1) {
                     return (
-
+                      
                       <TableRow
                         className={classes.tablerow}
                         ref={lastRecipeElementRef}
