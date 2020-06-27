@@ -83,7 +83,8 @@ function EnhancedTableHead(props) {
         {headCells.map(headCell => (
           <TableCell
             key={headCell.id}
-            align={headCell.numeric ? "right" : "left"}
+            //align={headCell.numeric ? "right" : "left"}
+            align={headCell.label==='NAME' ? "left" : "center"}
             padding={headCell.disablePadding ? "none" : "default"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -353,7 +354,7 @@ export default function DisplayUntaggedRecipe() {
                         <TableCell align="center">{data.cost_price.toFixed(2)}</TableCell>
                         <TableCell align="center">{data.sale_price.toFixed(2)}</TableCell>
                         <TableCell align="center">{(data.gross_margin.toFixed(2))}%</TableCell>
-                        <TableCell align="center">{`indian recipe`}</TableCell>
+                        <TableCell align="center"><mark style={{borderRadius:"25px"}}>{`Indian Ma...`}</mark></TableCell>
                       </TableRow>
                     );
                   }
@@ -389,7 +390,7 @@ export default function DisplayUntaggedRecipe() {
                         <TableCell align="center">{data.cost_price.toFixed(2)}</TableCell>
                         <TableCell align="center">{data.sale_price.toFixed(2)}</TableCell>
                         <TableCell align="center">{`${data.gross_margin}%`}</TableCell>
-                        <TableCell align="center">{`indian recipe`}</TableCell>
+                        <TableCell align="center"><mark style={{borderRadius:"25px"}}>{`Indian Ma...`}</mark></TableCell>
                       </TableRow>
                     )
                   }
